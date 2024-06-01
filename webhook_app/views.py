@@ -1,6 +1,5 @@
 from django.http import JsonResponse
 from webhook_app.models import Post
-from webhook_app.schema import PostType
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
@@ -8,7 +7,7 @@ def webhook_handler(request):
     if request.method == 'POST':
         # Fetch all posts from the database
         posts = Post.objects.all()
-        
+
         # Serialize posts data using GraphQL type
         posts_data = [serialize_post(post) for post in posts]
         
